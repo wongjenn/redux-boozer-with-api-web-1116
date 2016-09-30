@@ -12,10 +12,10 @@ function CocktailsShow (props) {
     <div>
       <h2>{cocktail.name}</h2>
       <p>{cocktail.description}</p>
+      <p>{cocktail.instructions}</p>
       <ul>
         {cocktail.proportions.map( proportion => <li key={proportion.id}>{`${proportion.amount} ${proportion.ingredient_name}`}</li>)}
       </ul>
-      <p>{cocktail.instructions}</p>
     </div>);
 }
 
