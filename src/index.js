@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router, browserHistory } from 'react-router';
-import routes from './routes';
-
 import { Provider } from 'react-redux';
 
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import ReduxPromise from 'redux-promise'
 import { fetchCocktails } from './actions'
+import App from './components/app'
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
@@ -21,6 +19,6 @@ console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store} >
-    <Router history={browserHistory} routes={routes} />
+    <App /> 
   </Provider>, document.getElementById('container')
 )
