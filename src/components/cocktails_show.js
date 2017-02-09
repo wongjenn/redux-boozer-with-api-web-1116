@@ -20,7 +20,7 @@ function CocktailsShow (props) {
 }
 
 function mapStateToProps(state, ownProps){
-  const cocktail = state.cocktails.find(cocktail => cocktail.id == ownProps.params.id);
+  const cocktail = state.cocktails.find(cocktail => cocktail.id == state.currentCocktail);
   return {
     cocktail: cocktail
   }
