@@ -4,11 +4,8 @@ import {connect} from 'react-redux';
 function CocktailsShow (props) {
   const cocktail = props.cocktail;
 
-  if (!cocktail) {
-    return <div>'Loading...'</div>;
-  }
-
-  return (
+  return cocktail.name === undefined ? (<div>'Click on a Cocktail to see details...'</div>) :
+  (
     <div>
       <h2>{cocktail.name}</h2>
       <p>{cocktail.description}</p>
@@ -20,7 +17,7 @@ function CocktailsShow (props) {
 }
 
 function mapStateToProps(state, ownProps){
-  const cocktail = state.cocktails.find(cocktail => cocktail.id == state.currentCocktail);
+  const cocktail = state.cocktails.find(cocktail => cocktail.id == state.currentCocktail) || {}
   return {
     cocktail: cocktail
   }

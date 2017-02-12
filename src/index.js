@@ -1,24 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { Provider } from 'react-redux';
-
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
-import ReduxPromise from 'redux-promise'
-import { fetchCocktails } from './actions'
+import { createStore, applyMiddleware } from 'redux'
+import promiseMiddleware from 'redux-promise'
+import { Provider } from 'react-redux'
+import cocktailsReducer from './reducers/cocktails_reducer'
+import currentCocktailReducer from './reducers/current_cocktail_reducer'
+import rootReducer from './reducers'
 import App from './components/app'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
 
-store.dispatch( fetchCocktails() );
-
-console.log(store.getState());
-
+const store = createStore(rootReducer, applyMiddleware(promiseMiddleware));
 
 ReactDOM.render(
-  <Provider store={store} >
-    <App /> 
-  </Provider>, document.getElementById('container')
-)
+  <Provider store={store}>
+  <App  />
+</Provider>
+, document.getElementById('container'));

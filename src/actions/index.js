@@ -1,25 +1,26 @@
-const BASE_URL = 'http://localhost:3000/api/v1'
+import axios from 'axios'
+const BASE_URL = "http://localhost:3000/api/v1"
+// API file: boozer-api-web-0716-web-1116
 
 export function fetchCocktails(){
-  const cocktails = fetch(`${BASE_URL}/cocktails`).then(res => res.json())
-
+  const cocktails = axios.get(`${BASE_URL}/cocktails`).then(response =>  response.data)
   return {
     type: 'FETCH_COCKTAILS',
     payload: cocktails
   }
 }
 
-export function createCocktail(params){
-  const cocktail = fetch(`${BASE_URL}/cocktails`,
-    {method: 'POST',
-    body: JSON.stringify(params),
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }});
-
+export function addCocktail(newCocktail){
+  const cocktail = axios.post(`${BASE_URL}/cocktails`, newCocktail).then ( response => response.data)
   return {
-    type: 'CREATE_COCKTAIL',
-    payload: params.cocktail
+    type: 'ADD_COCKTAIL',
+    payload: cocktail
+  }
+}
+
+export function changeCocktail (id) {
+    return {
+    type: 'UPDATE_CURRENT_COCKTAIL',
+    payload: id
   }
 }
